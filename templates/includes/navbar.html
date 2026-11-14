@@ -1,0 +1,67 @@
+{% load static %}
+
+<header class="site-header">
+    <div class="container navbar">
+
+        <a href="{% url 'pages:home' %}" class="brand">
+
+            {% if site_settings and site_settings.logo %}
+                <img
+                    src="{{ site_settings.logo.url }}"
+                    alt="{{ site_settings.site_name }}"
+                    class="brand-logo"
+                >
+            {% else %}
+                <span class="brand-mark">D</span>
+            {% endif %}
+
+            <span class="brand-text">
+                <strong>
+                    {% if site_settings %}
+                        {{ site_settings.site_name }}
+                    {% else %}
+                        DINBER
+                    {% endif %}
+                </strong>
+
+                <small>CIVIL SOCIETY ORGANIZATION</small>
+            </span>
+
+        </a>
+
+
+        <button
+            class="menu-toggle"
+            id="menuToggle"
+            aria-label="Open navigation menu"
+            aria-expanded="false"
+            aria-controls="mainNav"
+        >
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+
+        <nav class="main-nav" id="mainNav">
+
+            <a href="{% url 'pages:home' %}">Home</a>
+
+            {% for item in published_pages|slice:":5" %}
+                <a href="{% url 'pages:page_detail' item.slug %}">
+                    {{ item.title }}
+                </a>
+            {% endfor %}
+
+            <a href="#contact">Contact</a>
+             <a href="{% url 'media_library:gallery' %}">Gallery </a>
+             <a href="{% url 'media_library:video_library' %}"> Learning Centre</a>
+            <a href="#about" class="nav-cta">
+                About Dinber
+                <span>→</span>
+            </a>
+        
+        </nav>
+
+    </div>
+</header>

@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+
+{% block title %}Learning Centre | Dinber{% endblock %}
+
+{% block content %}
+
+<section class="learning-hero">
+    <div class="container">
+        <span class="eyebrow">LEARN • GROW • MAKE AN IMPACT</span>
+
+        <h1>Dinber Learning Centre</h1>
+
+        <p>
+            Explore educational resources, practical lessons
+            and knowledge that empowers individuals and communities.
+        </p>
+
+        <form method="get" class="lesson-search">
+            <input
+                type="search"
+                name="q"
+                placeholder="Search video lessons..."
+                value="{{ search_query }}"
+            >
+
+            <button type="submit">Search lessons</button>
+        </form>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+
+        <div class="section-heading">
+            <span class="eyebrow">EXPLORE OUR RESOURCES</span>
+            <h2>Video Lessons</h2>
+            <p>
+                Learn at your own pace with our educational videos.
+            </p>
+        </div>
+
+        <div class="lesson-grid">
+
+            {% for lesson in lessons %}
+
+                <article class="lesson-card">
+
+                    <a href="{% url 'media_library:video_detail' lesson.slug %}"
+                       class="lesson-thumbnail">
+
+                        {% if lesson.thumbnail %}
+                            <img
+                                src="{{ lesson.thumbnail.url }}"
+                                alt="{{ lesson.title }}"
+                                loading="lazy"
+                            >
+                        {% else %}
+                            <div class="thumbnail-placeholder">
+                                <span>▶</span>
+                            </div>
+                        {% endif %}
+
+                        <span class="play-indicator">▶</span>
+
+                    </a>
+
+                    <div class="lesson-content">
+
+                        {% if lesson.category %}
+                            <span class="lesson-category">
+                                {{ lesson.category }}
+                            </span>
+                        {% endif %}
+
+                        <h3>
+                            <a href="{% url 'media_library:video_detail' lesson.slug %}">
+                                {{ lesson.title }}
+                            </a>
+                        </h3>
+
+                        <p>
+                            {{ lesson.description|truncatewords:22 }}
+                        </p>
+
+                        {% if lesson.duration_minutes %}
+                            <span class="lesson-duration">
+                                {{ lesson.duration_minutes }} minutes
+                            </span>
+                        {% endif %}
+
+                    </div>
+
+                </article>
+
+            {% empty %}
+
+                <div class="empty-state">
+                    <h3>No lessons found</h3>
+                    <p>
+                        {% if search_query %}
+                            Try another search term.
+                        {% else %}
+                            Our learning resources will be available soon.
+                        {% endif %}
+                    </p>
+                </div>
+            {% endfor %}
+
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}

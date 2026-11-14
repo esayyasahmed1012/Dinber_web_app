@@ -1,0 +1,292 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+    Dinber | Empowering Communities and Creating Impact
+{% endblock %}
+
+
+{% block meta_description %}
+    Discover Dinber's mission, programs, initiatives and commitment
+    to sustainable community development.
+{% endblock %}
+
+
+{% block content %}
+
+
+<!-- HERO SECTION -->
+
+<section class="hero-section">
+
+    <div class="hero-overlay"></div>
+
+    <div class="container hero-container">
+
+        <div class="hero-content">
+
+            <span class="eyebrow hero-eyebrow">
+                CIVIL SOCIETY ORGANIZATION
+            </span>
+
+            <h1>
+                Empowering communities.
+                <span>Creating lasting impact.</span>
+            </h1>
+
+            <p>
+                We work to strengthen communities, encourage participation
+                and contribute to a more inclusive and sustainable future.
+            </p>
+
+            <div class="hero-actions">
+
+                <a href="#about" class="btn btn-primary">
+                    Discover Our Work
+                    <span>→</span>
+                </a>
+
+                <a href="#programs" class="btn btn-outline">
+                    Explore Our Programs
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <div class="hero-note">
+
+            <span class="hero-note-line"></span>
+
+            <p>
+                Driven by purpose.
+                Guided by integrity.
+                Committed to impact.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- INTRODUCTION -->
+
+<section class="intro-section" id="about">
+
+    <div class="container intro-grid">
+
+        <div class="intro-heading">
+
+            <span class="eyebrow">WHO WE ARE</span>
+
+            <h2>
+                Building stronger communities through meaningful action.
+            </h2>
+
+        </div>
+
+
+        <div class="intro-description">
+
+            <p>
+                Dinber is committed to supporting positive change through
+                community engagement, collaboration and initiatives that
+                respond to real needs.
+            </p>
+
+            <p>
+                Our work is guided by accountability, inclusion,
+                transparency and a commitment to sustainable development.
+            </p>
+
+            <a href="#programs" class="text-link">
+                Discover our work <span>→</span>
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- MISSION AND VALUES -->
+
+<section class="values-section">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <span class="eyebrow">OUR COMMITMENT</span>
+
+            <h2>Principles that guide our work</h2>
+
+            <p>
+                We believe meaningful change begins with integrity,
+                participation and a shared sense of responsibility.
+            </p>
+
+        </div>
+
+
+        <div class="values-grid">
+
+            <article class="value-card">
+                <span class="value-number">01</span>
+                <h3>Integrity</h3>
+                <p>
+                    Acting responsibly, ethically and transparently
+                    in everything we do.
+                </p>
+            </article>
+
+
+            <article class="value-card">
+                <span class="value-number">02</span>
+                <h3>Inclusiveness</h3>
+                <p>
+                    Encouraging participation and ensuring that
+                    different community voices are heard.
+                </p>
+            </article>
+
+
+            <article class="value-card">
+                <span class="value-number">03</span>
+                <h3>Accountability</h3>
+                <p>
+                    Taking responsibility for our commitments,
+                    decisions and outcomes.
+                </p>
+            </article>
+
+
+            <article class="value-card">
+                <span class="value-number">04</span>
+                <h3>Sustainability</h3>
+                <p>
+                    Supporting initiatives that contribute to
+                    lasting positive change.
+                </p>
+            </article>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ORGANIZATION PAGES / PROGRAMS -->
+
+<section class="programs-section" id="programs">
+
+    <div class="container">
+
+        <div class="section-heading section-heading-row">
+
+            <div>
+                <span class="eyebrow">EXPLORE DINBER</span>
+
+                <h2>Discover what we do</h2>
+
+                <p>
+                    Learn more about our organization, activities
+                    and areas of engagement.
+                </p>
+            </div>
+
+        </div>
+
+
+        <div class="program-grid">
+
+            {% for page in published_pages %}
+
+                <article class="program-card">
+
+                    {% if page.featured_image %}
+                        <img
+                            src="{{ page.featured_image.url }}"
+                            alt="{{ page.title }}"
+                            class="program-image"
+                        >
+                    {% else %}
+                        <div class="program-placeholder">
+                            <span>DINBER</span>
+                        </div>
+                    {% endif %}
+
+
+                    <div class="program-content">
+
+                        <h3>{{ page.title }}</h3>
+
+                        <p>
+                            {{ page.summary|default:page.content|truncatewords:22 }}
+                        </p>
+
+                        <a href="{% url 'pages:page_detail' page.slug %}"
+                           class="text-link">
+                            Read more <span>→</span>
+                        </a>
+
+                    </div>
+
+                </article>
+
+            {% empty %}
+
+                <div class="empty-content">
+                    <h3>Our stories are coming soon.</h3>
+                    <p>
+                        Please visit again to discover more about our work.
+                    </p>
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- CALL TO ACTION -->
+
+<section class="cta-section">
+
+    <div class="container cta-content">
+
+        <div>
+            <span class="eyebrow">BE PART OF THE CHANGE</span>
+
+            <h2>
+                Meaningful progress starts with collective action.
+            </h2>
+
+            <p>
+                Connect with Dinber and learn how you can engage
+                with our work.
+            </p>
+        </div>
+
+        <a href="#contact" class="btn btn-light">
+            Get in Touch <span>→</span>
+        </a>
+
+    </div>
+
+</section>
+
+
+{% endblock %}

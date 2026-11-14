@@ -1,0 +1,112 @@
+<footer class="site-footer" id="contact">
+
+    <div class="container footer-grid">
+
+        <div class="footer-about">
+            <h3>
+                {% if site_settings %}
+                    {{ site_settings.site_name }}
+                {% else %}
+                    DINBER
+                {% endif %}
+            </h3>
+
+            <p>
+                {% if site_settings and site_settings.tagline %}
+                    {{ site_settings.tagline }}
+                {% else %}
+                    Working together to create meaningful and sustainable
+                    change in our communities.
+                {% endif %}
+            </p>
+        </div>
+
+
+        <div>
+            <h4>Explore</h4>
+
+            <ul>
+                <li><a href="{% url 'pages:home' %}">Home</a></li>
+
+                {% for item in published_pages|slice:":5" %}
+                    <li>
+                        <a href="{% url 'pages:page_detail' item.slug %}">
+                            {{ item.title }}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+
+        <div>
+            <h4>Contact</h4>
+
+            {% if site_settings %}
+                <p>{{ site_settings.address }}</p>
+                <p>{{ site_settings.phone_number }}</p>
+                <p>{{ site_settings.contact_email }}</p>
+            {% else %}
+                <p>Contact information coming soon.</p>
+            {% endif %}
+        </div>
+
+
+        <div>
+            <h4>Connect with us</h4>
+
+            <ul>
+                {% if site_settings.facebook_url %}
+                    <li>
+                        <a href="{{ site_settings.facebook_url }}"
+                           target="_blank"
+                           rel="noopener noreferrer">Facebook</a>
+                    </li>
+                {% endif %}
+
+                {% if site_settings.linkedin_url %}
+                    <li>
+                        <a href="{{ site_settings.linkedin_url }}"
+                           target="_blank"
+                           rel="noopener noreferrer">LinkedIn</a>
+                    </li>
+                {% endif %}
+
+                {% if site_settings.instagram_url %}
+                    <li>
+                        <a href="{{ site_settings.instagram_url }}"
+                           target="_blank"
+                           rel="noopener noreferrer">Instagram</a>
+                    </li>
+                {% endif %}
+
+                {% if site_settings.youtube_url %}
+                    <li>
+                        <a href="{{ site_settings.youtube_url }}"
+                           target="_blank"
+                           rel="noopener noreferrer">YouTube</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+
+    </div>
+
+
+    <div class="container footer-bottom">
+
+        <p>
+            &copy; {% now "Y" %}
+            {% if site_settings %}
+                {{ site_settings.site_name }}
+            {% else %}
+                Dinber
+            {% endif %}.
+            All rights reserved.
+        </p>
+
+        <p>Transparency. Participation. Sustainable impact.</p>
+
+    </div>
+
+</footer>

@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {{ page.meta_title|default:page.title }} | Dinber
+{% endblock %}
+
+{% block meta_description %}
+    {{ page.meta_description|default:page.summary }}
+{% endblock %}
+
+{% block content %}
+
+<section class="page-banner">
+    <div class="container">
+        <span class="eyebrow" style="color: #E5C47D;">
+            EXPLORE DINBER
+        </span>
+
+        <h1>{{ page.title }}</h1>
+
+        <p>{{ page.summary }}</p>
+    </div>
+</section>
+
+<section class="container article-content">
+
+    {% if page.featured_image %}
+        <img
+            src="{{ page.featured_image.url }}"
+            alt="{{ page.title }}"
+            class="article-image"
+        >
+    {% endif %}
+
+    <article class="article-text">
+        {{ page.content|linebreaks }}
+    </article>
+
+</section>
+
+{% endblock %}

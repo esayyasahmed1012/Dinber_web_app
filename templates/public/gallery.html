@@ -1,0 +1,63 @@
+
+{% extends "base.html" %}
+
+{% block title %}Gallery | Dinber{% endblock %}
+
+{% block content %}
+
+<section class="section">
+    <div class="container">
+
+        <div class="section-heading">
+            <span class="eyebrow">OUR ACTIVITIES</span>
+
+            <h1>Photo Gallery</h1>
+
+            <p>
+                Explore moments, activities, and the impact
+                of Dinber's work in our communities.
+            </p>
+        </div>
+
+        <div class="gallery-grid">
+
+            {% for image in images %}
+
+                <article class="gallery-card">
+
+                    <img
+                        src="{{ image.image.url }}"
+                        alt="{{ image.alt_text }}"
+                        loading="lazy"
+                    >
+
+                    <div class="gallery-card-content">
+
+                        <h3>{{ image.title }}</h3>
+
+                        {% if image.description %}
+                            <p>{{ image.description }}</p>
+                        {% endif %}
+
+                    </div>
+
+                </article>
+
+            {% empty %}
+
+                <div class="empty-state">
+                    <h3>No images published yet</h3>
+                    <p>
+                        Please check back later to explore
+                        our activities.
+                    </p>
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}
