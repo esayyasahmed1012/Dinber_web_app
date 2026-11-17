@@ -54,6 +54,13 @@
             {% endfor %}
 
             <a href="#contact">Contact</a>
+            <a href="{% url 'announcements:list' %}"
+             class="announcement-nav-link">
+             Announcements
+             {% if has_new_announcements %}
+             <span class="announcement-indicator"></span>
+             {% endif %}
+            </a>
              <a href="{% url 'media_library:gallery' %}">Gallery </a>
              <a href="{% url 'media_library:video_library' %}"> Learning Centre</a>
             <a href="#about" class="nav-cta">

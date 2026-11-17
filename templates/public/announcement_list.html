@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block title %}Announcements | Dinber{% endblock %}
+
+{% block content %}
+
+<section class="page-header">
+    <div class="container">
+        <h1>Announcements</h1>
+        <p>Stay informed about the latest news and updates from Dinber.</p>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+
+        {% if announcements %}
+
+            <div class="program-grid">
+
+                {% for announcement in announcements %}
+
+                    <article class="program-card">
+
+                        {% if announcement.featured_image %}
+                            <img
+                                src="{{ announcement.featured_image.url }}"
+                                alt="{{ announcement.title }}"
+                            >
+                        {% endif %}
+
+                        <div class="program-card-content">
+
+                            <h3>{{ announcement.title }}</h3>
+
+                            <p>{{ announcement.summary }}</p>
+
+                            <small>
+                                {{ announcement.published_at|date:"F d, Y" }}
+                            </small>
+
+                            <br><br>
+
+                            <a href="{% url 'announcements:detail' announcement.slug %}"
+                               class="btn btn-primary">
+                                Read More
+                            </a>
+
+                        </div>
+
+                    </article>
+
+                {% endfor %}
+
+            </div>
+
+        {% else %}
+
+            <div class="empty-state">
+                <h2>No announcements yet</h2>
+                <p>Please check back later for updates.</p>
+            </div>
+
+        {% endif %}
+
+    </div>
+</section>
+
+{% endblock %}

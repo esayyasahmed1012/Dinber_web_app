@@ -1,0 +1,77 @@
+
+{% extends "base.html" %}
+
+{% block title %}{{ lesson.title }} | Dinber Learning Centre{% endblock %}
+
+{% block content %}
+
+<section class="section">
+    <div class="container">
+
+        <a href="{% url 'media_library:video_library' %}"
+           class="back-link">
+            ← Back to Learning Centre
+        </a>
+
+        <article class="video-detail">
+
+            <div class="video-player">
+
+                {% if lesson.video_file %}
+
+                    <video controls preload="metadata">
+                        <source src="{{ lesson.video_file.url }}"
+                        type="{{ video_mime_type|default:'video/mp4' }}"
+                        >
+                        Your browser does not support video playback.
+                    </video>
+
+                {% elif embed_url %}
+
+                    <iframe
+                        src="{{ embed_url }}"
+                        title="{{ lesson.title }}"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen
+                        loading="lazy">
+                    </iframe>
+
+                {% else %}
+
+                    <div class="empty-state">
+                        <h3>Video unavailable</h3>
+                        <p>Please contact the website administrator.</p>
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+            <div class="video-information">
+
+                {% if lesson.category %}
+                    <span class="lesson-category">
+                        {{ lesson.category }}
+                    </span>
+                {% endif %}
+
+                <h1>{{ lesson.title }}</h1>
+
+                <p class="video-description">
+                    {{ lesson.description|linebreaks }}
+                </p>
+
+                {% if lesson.published_at %}
+                    <p class="published-date">
+                        Published {{ lesson.published_at|date:"F j, Y" }}
+                    </p>
+                {% endif %}
+
+            </div>
+
+        </article>
+
+    </div>
+</section>
+
+{% endblock %}

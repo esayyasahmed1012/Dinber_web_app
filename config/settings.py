@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'apps.core',
     'apps.pages',
     'apps.media_library',
+    'apps.announcements',
 ]
 
 MIDDLEWARE = [
@@ -68,6 +69,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 "apps.core.context_processors.site_context",
+                "apps.announcements.context_processors.announcement_context",
             ],
         },
     },

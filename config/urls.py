@@ -28,6 +28,8 @@ urlpatterns = [
     path("", include("apps.pages.urls")),
     # Media library URLs
     path("", include("apps.media_library.urls")),
+    # Announcements URLs
+    path("", include("apps.announcements.urls")),
 ]
 
 

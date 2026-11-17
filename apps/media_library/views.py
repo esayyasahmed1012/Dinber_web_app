@@ -2,7 +2,7 @@ from urllib.parse import urlparse, parse_qs
 
 from django.shortcuts import render, get_object_or_404
 from django.db.models import Q
-
+import mimetypes
 from .models import MediaImage, VideoLesson
 
 
@@ -82,10 +82,17 @@ def video_detail(request, slug):
     lesson = get_object_or_404(
         VideoLesson,
         slug=slug,
-        status=VideoLesson.Status.PUBLISHED,
+        status=VideoLesson.Status.PUBLISHED
     )
 
     embed_url = get_video_embed_url(lesson.video_url)
+
+    video_mime_type = None
+
+    if lesson.video_file:
+        video_mime_type, _ = mimetypes.guess_type(
+            lesson.video_file.name
+        )
 
     return render(
         request,
@@ -93,5 +100,6 @@ def video_detail(request, slug):
         {
             "lesson": lesson,
             "embed_url": embed_url,
-        },
+            "video_mime_type": video_mime_type,
+        }
     )
